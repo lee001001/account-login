@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const exphbs = require('express-handlebars')
+const userCheck = require('./login_check')
 const bodyParser = require('body-parser')
 const PORT = 3000
 
@@ -16,15 +17,12 @@ app.get('/', (req, res) => {
 
 // 設定首頁Post
 app.post('/', (req, res) => {
-  const email = req.body.email
-  const password = req.body.password
+  const userInfo = userCheck(req.body)
 
-  console.log('The Account:', email)
-  console.log('The password:', password)
-
-  if (email === 'a1234@gmail') {
-    // console.log('verifiedAccount:', verifiedAccount);
-    res.render('welcome')
+  if (userInfo.firstName !== undefined) {
+    res.render('welcome', { userInfo: userInfo })
+  } else {
+    res.render('index')
   }
 })
 
