@@ -10,13 +10,12 @@ app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cookieParser())
+app.use(cookieParser('12345678'))
 
 // 設定首頁路由
 app.get('/', (req, res) => {
-  if (req.cookies.name) {
+  if (req.signedCookies.name) {
     const firstName = req.cookies.name
-    console.log('Cook設定')
     res.render('welcome', { firstName: firstName })
   } else {
     res.render('index')
@@ -27,10 +26,8 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   const firstName = userCheck(req.body)
 
-  console.log(firstName)
-
   if (firstName !== undefined) {
-    res.cookie('name', `${firstName}`)
+    res.cookie('name', `${firstName}`, { signed: true })
     res.render('welcome', { firstName: firstName })
   } else {
     const error = true
