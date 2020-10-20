@@ -38,6 +38,12 @@ app.post('/', (req, res) => {
   }
 })
 
+// clear cookie
+app.get('/logout', (req, res) => {
+  res.clearCookie('name', { path: '/' })
+  return res.redirect('/')
+})
+
 // 設定 port 3000
 app.listen(PORT, () => {
   console.log(`App is running on http://localhost:${PORT}`)
