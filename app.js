@@ -33,8 +33,11 @@ app.post('/', (req, res) => {
     res.cookie('name', `${firstName}`)
     res.render('welcome', { firstName: firstName })
   } else {
+    const error = true
+    const errorMessage = 'Email 或 Password 錯誤'
+
     console.log('密碼錯誤')
-    res.render('index')
+    res.render('index', { error, errorMessage })
   }
 })
 

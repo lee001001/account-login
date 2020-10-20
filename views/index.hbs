@@ -2,7 +2,7 @@
   <form action="/" method="POST">
 
     <div class="card border-success" style="max-width: 18rem;">
-      <div class="card-header bg-transparent border-success">Account Logic</div>
+      <div class="card-header bg-transparent border-success">Account Login</div>
       <div class="card-body text-success">
 
         <div class="form-group">
@@ -12,6 +12,10 @@
         <div class="form-group">
           <input type="text" id="password" name="password" placeholder="Password">
         </div>
+        {{#if error}}
+        <small class="mb-3 form-text text-danger ">{{errorMessage}}</small>
+        {{/if}}
+
 
 
         <button type="submit" class="btn btn-primary">Sign In</button>

@@ -26,7 +26,7 @@ const users = [
   }
 ]
 
-function userCheck(userInput) {
+function userCheck (userInput) {
   for (let i = 0; i < users.length; i++) {
     if (users[i].email === userInput.email & users[i].password === userInput.password) {
       return users[i].firstName
